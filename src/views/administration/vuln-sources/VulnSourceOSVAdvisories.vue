@@ -3,7 +3,6 @@
     <b-card-body>
       <hr/>
       <c-switch
-        :disabled="!this.vulnsourceEnabled"
         color="primary"
         id="vulnsourceEnabled"
         label
@@ -16,7 +15,6 @@
     </b-card-body>
     <b-card-footer>
       <b-button
-        :disabled="this.vulnsourceEnabled"
         @click="saveChanges"
         class="px-4"
         variant="outline-primary">
