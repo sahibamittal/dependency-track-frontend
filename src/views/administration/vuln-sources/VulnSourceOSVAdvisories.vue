@@ -40,7 +40,6 @@ export default {
   data() {
     return {
       vulnsourceEnabled: false,
-      apitoken: '',
       labelIcon: {
         dataOn: '\u2713',
         dataOff: '\u2715'
