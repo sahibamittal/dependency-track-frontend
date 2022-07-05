@@ -3,10 +3,10 @@ name: Build CI
 on:
   push:
     branches:
-      - 'osv-support-test' # Default branch
+      - 'snyk-integration' # Default branch
   pull_request:
     branches:
-      - 'osv-support-test' # Default branch
+      - 'snyk-integration' # Default branch
   workflow_dispatch:
 
 jobs:
