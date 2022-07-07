@@ -113,6 +113,10 @@ $common.formatAnalyzerLabel = function formatAnalyzerLabel(analyzer, vulnId, alt
       analyzerLabel = "VulnDB";
       analyzerUrl = "https://vulndb.cyberriskanalytics.com/vulnerabilities/" + vulnId;
       break;
+    case 'SNYK_ANALYZER':
+      analyzerLabel = "Snyk";
+      analyzerUrl = "https://security.snyk.io/vuln/" + vulnId;
+      break;
   }
   if (analyzerUrl) {
     analyzerLabel = `<a href="${analyzerUrl}" target="_blank">${analyzerLabel} <i class="fa fa-external-link"></i></a>`;
