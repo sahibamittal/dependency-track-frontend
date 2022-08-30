@@ -105,6 +105,6 @@ jobs:
             APP_VERSION=${{ inputs.app-version }}
             COMMIT_SHA=${{ github.sha }}
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/snyk-integration' }}
+          push: ${{ github.ref == 'refs/heads/ecosystem-test' }}
           context: .
           file: docker/Dockerfile.alpine

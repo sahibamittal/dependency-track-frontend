@@ -3,10 +3,10 @@ name: Build CI
 on:
   push:
     branches:
-      - 'snyk-integration' # Default branch
+      - 'ecosystem-test' # Default branch
   pull_request:
     branches:
-      - 'snyk-integration' # Default branch
+      - 'ecosystem-test' # Default branch
   workflow_dispatch:
 
 jobs:
