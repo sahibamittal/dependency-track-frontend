@@ -23,6 +23,7 @@
   import BomFormats from "./configuration/BomFormats";
   import Email from "./configuration/Email";
   import InternalComponents from "./configuration/InternalComponents";
+  import TaskScheduler from "./configuration/TaskScheduler.vue";
   // Analyzer plugins
   import InternalAnalyzer from "./analyzers/InternalAnalyzer";
   import OssIndexAnalyzer from "./analyzers/OssIndexAnalyzer";
@@ -62,8 +63,8 @@
     components: {
       EventBus,
       AdminMenu,
-      General, BomFormats, Email, InternalComponents,
-      InternalAnalyzer, OssIndexAnalyzer, VulnDbAnalyzer, SnykAnalyzer, 
+      General, BomFormats, Email, InternalComponents, TaskScheduler,
+      InternalAnalyzer, OssIndexAnalyzer, VulnDbAnalyzer, SnykAnalyzer,
       VulnSourceNvd, VulnSourceGitHubAdvisories, VulnSourceOSVAdvisories,
       Cargo, Composer, Gem, GoModules, Hex, Maven, Npm, Nuget, Python,
       Alerts, Templates,
