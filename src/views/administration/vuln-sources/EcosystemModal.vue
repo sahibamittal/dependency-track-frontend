@@ -35,7 +35,7 @@
             title: this.$t('message.name'),
             field: "name",
             sortable: true,
-            formatter(value, row, index) {
+            formatter(value) {
               return xssFilters.inHTMLData(common.valueWithDefault(value, ""));
             }
           }
@@ -56,7 +56,9 @@
           },
           responseHandler: function (res, xhr) {
             res.total = xhr.getResponseHeader("X-Total-Count");
-            return res;
+            return res.map(ecosystem => ({
+                name: ecosystem
+            }));
           },
           url: `${this.$api.BASE_URL}/${this.$api.URL_OSV_ECOSYSTEM}`
         }
