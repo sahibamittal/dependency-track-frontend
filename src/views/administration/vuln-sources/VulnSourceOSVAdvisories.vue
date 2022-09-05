@@ -32,11 +32,6 @@
         variant="outline-primary">
           {{ $t('message.update') }}
       </b-button>
-      <!--
-        This button can be used to trigger the modal. v-b-modal does the magic, see:
-        https://bootstrap-vue.org/docs/components/modal#using-v-b-modal-directive
-      -->
-      <b-button size="md" class="px-4" variant="outline-primary" v-b-modal.ecosystemModal>Hi!</b-button>
     </b-card-footer>
     <ecosystem-modal v-on:selection="updateEcosystem"/>
   </b-card>
