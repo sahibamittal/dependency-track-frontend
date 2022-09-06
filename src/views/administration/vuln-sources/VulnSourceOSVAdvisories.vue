@@ -9,6 +9,8 @@
         label
         v-bind="labelIcon"
         v-model="vulnsourceEnabled"
+        @change="handleVulnsourceEnabled"
+        :disabled="enabledEcosystems.length === 0"
       />
       {{$t('admin.vulnsource_osv_advisories_enable')}}
       <hr/>
@@ -25,21 +27,12 @@
       </b-form-group>
       <hr/>
     </b-card-body>
-    <!-- <b-card-footer>
-      <b-button
-        @click="saveChanges"
-        class="px-4"
-        variant="outline-primary">
-          {{ $t('message.update') }}
-      </b-button>
-    </b-card-footer> -->
     <ecosystem-modal v-on:selection="updateEcosystem"/>
   </b-card>
 </template>
 <script>
 
 import { Switch as cSwitch } from '@coreui/vue';
-import common from "../../../shared/common";
 import configPropertyMixin from "../mixins/configPropertyMixin";
 import EcosystemModal from "./EcosystemModal";
 import ActionableListGroupItem from '../../components/ActionableListGroupItem.vue';
@@ -66,11 +59,6 @@ export default {
     }
   },
   methods: {
-    // saveChanges: function() {
-    //   this.updateConfigProperties([
-    //     {groupName: 'vuln-source', propertyName: 'google.osv.enabled', propertyValue: this.vulnsourceEnabled}
-    //   ]);
-    // },
     removeEcosystem: function(ecosystem) {
       this.enabledEcosystems = this.enabledEcosystems.filter(e => e !== ecosystem);
       this.vulnsourceEnabled = this.enabledEcosystems.length !== 0;
@@ -88,6 +76,11 @@ export default {
       this.updateConfigProperties([
         {groupName: 'vuln-source', propertyName: 'google.osv.enabled', propertyValue: this.enabledEcosystems.join(";")}
       ]);
+    },
+    handleVulnsourceEnabled: function(vulnsourceEnabled) {
+      if (vulnsourceEnabled === false) {
+        this.enabledEcosystems = [];
+      }
     }
   },
   created () {
