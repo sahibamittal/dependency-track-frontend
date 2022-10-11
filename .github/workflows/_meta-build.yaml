@@ -104,6 +104,6 @@ jobs:
             APP_VERSION=${{ inputs.app-version }}
             COMMIT_SHA=${{ github.sha }}
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.ref == 'refs/heads/ecosystem-test' }}
+          push: ${{ github.ref == 'refs/heads/internal-dt-latest' }}
           context: .
           file: docker/Dockerfile.alpine
