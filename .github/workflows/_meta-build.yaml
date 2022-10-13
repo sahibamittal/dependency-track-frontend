@@ -71,10 +71,10 @@ jobs:
           name: assembled-frontend-node${{ inputs.node-version-package }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1.2.0
+        uses: docker/setup-qemu-action@v2.1.0
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1.6.0
+        uses: docker/setup-buildx-action@v2.1.0
         id: buildx
         with:
           install: true
@@ -97,7 +97,7 @@ jobs:
           echo "::set-output name=tags::${TAGS}"
 
       - name: Build multi-arch Container Image
-        uses: docker/build-push-action@v2.9.0
+        uses: docker/build-push-action@v3.2.0
         with:
           tags: ${{ steps.tags.outputs.tags }}
           build-args: |-
