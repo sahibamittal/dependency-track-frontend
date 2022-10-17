@@ -15,7 +15,6 @@
         :label="$t('admin.org_id')"
         input-group-size="mb-3"
         rules="required"
-        type="password"
         v-model="orgId"
         lazy="true"
       />
