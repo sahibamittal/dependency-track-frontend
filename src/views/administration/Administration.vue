@@ -29,6 +29,7 @@
   import OssIndexAnalyzer from "./analyzers/OssIndexAnalyzer";
   import SnykAnalyzer from "./analyzers/SnykAnalyzer";
   import VulnDbAnalyzer from "./analyzers/VulnDbAnalyzer";
+  import SnykAnalyzer from "./analyzers/SnykAnalyzer";
   // Vulnerability sources
   import VulnSourceNvd from "./vuln-sources/VulnSourceNvd";
   import VulnSourceGitHubAdvisories from "./vuln-sources/VulnSourceGitHubAdvisories";
