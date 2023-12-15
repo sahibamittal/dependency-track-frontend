@@ -103,7 +103,7 @@ jobs:
           echo "::set-output name=tags::${TAGS}"
 
       - name: Build multi-arch Container Image
-        uses: docker/build-push-action@v3.3.0
+        uses: docker/build-push-action@v5.1.0
         with:
           tags: ${{ steps.tags.outputs.tags }}
           build-args: |-
@@ -116,7 +116,7 @@ jobs:
 
       - name: Run Trivy Vulnerability Scanner
         if: ${{ inputs.publish-container }}
-        uses: aquasecurity/trivy-action@0.14.0
+        uses: aquasecurity/trivy-action@0.16.0
         with:
           image-ref: docker.io/dependencytrack/frontend:${{ inputs.app-version }}
           format: 'sarif'

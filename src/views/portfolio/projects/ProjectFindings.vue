@@ -213,6 +213,12 @@
             formatter(value, row, index) {
               return value === true ? '<i class="fa fa-check-square-o" />' : "";
             },
+          },
+          {
+            title: this.$t('message.matrix'),
+            field: "matrix",
+            sortable: true,
+            visible: false
           }
         ],
         data: [],
@@ -230,6 +236,7 @@
           pageSize: (localStorage && localStorage.getItem("ProjectFindingsPageSize") !== null) ? Number(localStorage.getItem("ProjectFindingsPageSize")) : 10,
           sortName: (localStorage && localStorage.getItem("ProjectFindingsSortName") !== null) ? localStorage.getItem("ProjectFindingsSortName") : undefined,
           sortOrder: (localStorage && localStorage.getItem("ProjectFindingsSortOrder") !== null) ? localStorage.getItem("ProjectFindingsSortOrder") : undefined,
+          searchText: this.$route.params.vulnerability ? ":" + this.$route.params.vulnerability : undefined,
           icons: {
             detailOpen: 'fa-fw fa-angle-right',
             detailClose: 'fa-fw fa-angle-down',
@@ -554,6 +561,9 @@
       tableLoaded: function(data) {
         loadUserPreferencesForBootstrapTable(this, "ProjectFindings", this.$refs.table.columns);
         this.$emit('total', data.total);
+        if (this.$route.params.vulnerability) {
+          this.$refs.table.expandRow(0);
+        }
       },
       initializeTooltips: function () {
         $('[data-toggle="tooltip"]').tooltip({
