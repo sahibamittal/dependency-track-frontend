@@ -9,6 +9,7 @@ export default {
   name: "MonacoEditor",
   props: {
     value: String,
+    readOnly: Boolean,
     markers: [],
   },
   data() {
@@ -37,6 +38,7 @@ export default {
         theme: "vs-dark",
         wordWrap: "on",
         wrappingStrategy: "advanced",
+        readOnly: this.readOnly
       });
 
       this.editorModel = this.editor.getModel();
