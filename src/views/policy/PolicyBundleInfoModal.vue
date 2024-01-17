@@ -1,17 +1,20 @@
 <template>
-  <b-modal id="policyBundleInfoModal" size="lg" hide-header-close no-stacking :title="$t('message.project_details')" @show="initializeTags" @hide="resetValues()">
+  <b-modal id="policyBundleInfoModal" size="lg" hide-header-close no-stacking :title="$t('message.policy_bundle_info')">
     <b-tabs class="body-bg-color" style="border:0;padding:0">
       <b-tab class="body-bg-color" style="border:0;padding:0" active>
         <template v-slot:title><i class="fa fa-edit"></i> {{ $t('message.general') }}</template>
         <b-card>
-          <b-input-group-form-input id="bundle-url" input-group-size="mb-3" type="text" v-model="bundle.url"
-                                    lazy="true" required="true" feedback="true" autofocus="false"
+          <b-input-group-form-input id="bundle-url" input-group-size="mb-3" type="text" v-model="bundleInfo.url"
+                                    lazy="true" feedback="true" autofocus="false"
                                     :label="$t('message.policy_bundle_url')" :readonly="true" />
-          <b-input-group-form-input id="bundle-hash" input-group-size="mb-3" type="text" v-model="bundle.hash"
-                                    lazy="true" required="false" feedback="false" autofocus="false"
+          <b-input-group-form-input id="bundle-hash" input-group-size="mb-3" type="text" v-model="bundleInfo.hash"
+                                    lazy="true" feedback="false" autofocus="false"
                                     :label="$t('message.policy_bundle_hash')" :readonly="true" />
-          <b-input-group-form-select id="v-classifier-input" required="true" v-model="bundle.lastSyncDate"
-                                     :label="$t('message.policy_bundle_sync_timestamp')" :readonly="true" />
+          <b-input-group-form-input id="bundle-created" input-group-size="mb-3" type="text" :value="bundleCreated" 
+                                    lazy="true" feedback="false" autofocus="false"
+                                    :label="$t('message.created')" :readonly="true" />
+          <b-input-group-form-input id="bundle-last-sync" :value="bundleLastSynced"
+                                    :label="$t('message.policy_bundle_sync_timestamp')" :readonly="true" />
         </b-card>
       </b-tab>
     </b-tabs>
@@ -28,6 +31,7 @@
   import permissionsMixin from "../../mixins/permissionsMixin";
   import Multiselect from "vue-multiselect"
   import VueTagsInput from '@johmun/vue-tags-input';
+  import common from "../../shared/common";
 
   export default {
     name: "PolicyBundleInfoModal",
@@ -39,23 +43,36 @@
       cSwitch,
       Multiselect
     },
-    props: {},
+    props: {
+      bundleInfo: Object,
+    },
     data() {
       return {
         addOnKeys: [9, 13, 32, ':', ';', ','], // Separators used when typing tags into the vue-tag-input
         labelIcon: {
           dataOn: '\u2713',
           dataOff: '\u2715'
-        },
-        bundleToken: ""
+        }
+      }
+    },
+    computed: {
+      bundleCreated: {
+        get() {
+          return (typeof this.bundleInfo.created !== 'undefined' && this.bundleInfo.created != null) ? common.formatTimestamp(this.bundleInfo.created) : "-";
+        }
+      },
+      bundleLastSynced: {
+        get() {
+          return (typeof this.bundleInfo.lastSuccessfulSync !== 'undefined' && this.bundleInfo.lastSuccessfulSync != null) ? common.formatTimestamp(this.bundleInfo.lastSuccessfulSync) : "-";
+        }
       }
     },
     beforeMount() {
-      this.$root.$on('initializePolicyBundleInfoModal', async () => {
-        console.log("inside initializeBundleInfoModal");
-        this.bundle = (await this.axios.get(`${this.$api.BASE_URL}/${this.$api.URL_POLICY}/bundle`)).data
-        this.$root.$emit("bv::show::modal", "policyBundleInfoModal")
-      })
+      // this.$root.$on('initializePolicyBundleInfoModal', async () => {
+      //   console.log("inside initializeBundleInfoModal");
+        
+      //   // this.$root.$emit("bv::show::modal", "policyBundleInfoModal")
+      // })
     }
   }
 </script>
