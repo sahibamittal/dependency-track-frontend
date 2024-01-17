@@ -67,13 +67,7 @@
         }
       }
     },
-    beforeMount() {
-      // this.$root.$on('initializePolicyBundleInfoModal', async () => {
-      //   console.log("inside initializeBundleInfoModal");
-        
-      //   // this.$root.$emit("bv::show::modal", "policyBundleInfoModal")
-      // })
-    }
+    beforeMount() {}
   }
 </script>
 
