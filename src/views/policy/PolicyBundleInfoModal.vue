@@ -19,6 +19,11 @@
       </b-tab>
     </b-tabs>
     <template v-slot:modal-footer="{ cancel }">
+      <b-button id="sync-button" size="md" variant="outline-primary"
+                @click="sync()"
+                v-permission:or="[PERMISSIONS.POLICY_MANAGEMENT]">
+        <span class="fa fa-refresh"></span> {{ $t('message.policy_bundle_sync') }}
+      </b-button>
       <b-button size="md" variant="secondary" @click="cancel()">{{ $t('message.close') }}</b-button>
     </template>
   </b-modal>
@@ -48,11 +53,7 @@
     },
     data() {
       return {
-        addOnKeys: [9, 13, 32, ':', ';', ','], // Separators used when typing tags into the vue-tag-input
-        labelIcon: {
-          dataOn: '\u2713',
-          dataOff: '\u2715'
-        }
+        syncToken: {}
       }
     },
     computed: {
@@ -67,7 +68,22 @@
         }
       }
     },
-    beforeMount() {}
+    beforeMount() {},
+    methods: {
+      sync: function () {
+        let syncUrl = `${this.$api.BASE_URL}/${this.$api.URL_VULNERABILITY_POLICY}/bundle/sync`
+        this.axios.post(syncUrl).then((response) => {
+          this.$toastr.s(this.$t('message.policy_bundle_sync_requested'));
+        })
+        .then(response => {
+          this.syncToken = response.token;
+          // TODO : do something with token
+        })
+        .catch(error => {
+          this.$toastr.w(error.response.data.message);
+        });
+      }
+    }
   }
 </script>
 
