@@ -49,6 +49,7 @@
   "URL_OIDC_MAPPING": "api/v1/oidc/mapping",
   "URL_BOM": "api/v1/bom",
   "URL_POLICY": "api/v1/policy",
+  "URL_VULNERABILITY_POLICY": "api/v1/policy/vulnerability",
   "URL_POLICY_VIOLATION": "api/v1/violation",
   "URL_POLICY_VIOLATION_ANALYSIS": "api/v1/violation/analysis",
   "URL_LICENSE_GROUP": "api/v1/licenseGroup",
