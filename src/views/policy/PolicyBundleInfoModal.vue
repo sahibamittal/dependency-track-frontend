@@ -64,7 +64,9 @@
       },
       bundleLastSynced: {
         get() {
-          return (typeof this.bundleInfo.lastSuccessfulSync !== 'undefined' && this.bundleInfo.lastSuccessfulSync != null) ? common.formatTimestamp(this.bundleInfo.lastSuccessfulSync) : "-";
+          return typeof (this.bundleInfo.lastSuccessfulSync != null && this.bundleInfo.lastSuccessfulSync === "number") 
+          ? common.formatTimestamp(this.bundleInfo.lastSuccessfulSync, true) 
+          : "-";
         }
       }
     },
