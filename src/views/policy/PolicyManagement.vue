@@ -9,7 +9,7 @@
         <template v-slot:title><i class="fa fa-balance-scale"></i> {{ $t('message.license_groups') }} <b-badge variant="tab-total">{{ totalLicenseGroups }}</b-badge></template>
         <license-group-list v-on:total="totalLicenseGroups = $event" />
       </b-tab>
-      <b-tab ref="vulnerabilitypolicies" class="body-bg-color overview-chart" style="border-left: 0; border-right:0; border-top:0 " active @click="routeTo('vulnerability')">
+      <b-tab ref="vulnerabilitypolicies" class="body-bg-color overview-chart" style="border-left: 0; border-right:0; border-top:0 " @click="routeTo('vulnerability')">
         <template v-slot:title><i class="fa fa-list-alt"></i> {{ $t('message.vulnerability_policies') }} <b-badge variant="tab-total">{{ totalVulnerabilityPolicies }}</b-badge></template>
         <vulnerability-policy-list v-on:total="totalVulnerabilityPolicies = $event" />
       </b-tab>

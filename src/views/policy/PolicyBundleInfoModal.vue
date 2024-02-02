@@ -10,7 +10,7 @@
           <b-input-group-form-input id="bundle-hash" input-group-size="mb-3" type="text" v-model="bundleInfo.hash"
                                     lazy="true" feedback="false" autofocus="false"
                                     :label="$t('message.policy_bundle_hash')" disabled="true" />
-          <b-input-group-form-input id="bundle-created" input-group-size="mb-3" type="text" :value="bundleCreated" 
+          <b-input-group-form-input id="bundle-created" input-group-size="mb-3" type="text" :value="bundleCreated"
                                     lazy="true" feedback="false" autofocus="false"
                                     :label="$t('message.created')" disabled="true" />
           <b-input-group-form-input id="bundle-last-sync" :value="bundleLastSynced" feedback="false"
@@ -19,11 +19,6 @@
       </b-tab>
     </b-tabs>
     <template v-slot:modal-footer="{ cancel }">
-      <b-button id="sync-button" size="md" variant="outline-primary"
-                @click="sync()"
-                v-permission:or="[PERMISSIONS.POLICY_MANAGEMENT]">
-        <span class="fa fa-refresh"></span> {{ $t('message.policy_bundle_sync') }}
-      </b-button>
       <b-button size="md" variant="secondary" @click="cancel()">{{ $t('message.close') }}</b-button>
     </template>
   </b-modal>
@@ -64,26 +59,10 @@
       },
       bundleLastSynced: {
         get() {
-          return typeof (this.bundleInfo.lastSuccessfulSync != null && this.bundleInfo.lastSuccessfulSync === "number") 
-          ? common.formatTimestamp(this.bundleInfo.lastSuccessfulSync, true) 
+          return typeof (this.bundleInfo.lastSuccessfulSync != null && this.bundleInfo.lastSuccessfulSync === "number")
+          ? common.formatTimestamp(this.bundleInfo.lastSuccessfulSync, true)
           : "-";
         }
-      }
-    },
-    beforeMount() {},
-    methods: {
-      sync: function () {
-        let syncUrl = `${this.$api.BASE_URL}/${this.$api.URL_VULNERABILITY_POLICY}/bundle/sync`
-        this.axios.post(syncUrl).then((response) => {
-          this.$toastr.s(this.$t('message.policy_bundle_sync_requested'));
-        })
-        .then(response => {
-          this.syncToken = response.token;
-          // TODO : do something with token
-        })
-        .catch(error => {
-          this.$toastr.w(error.response.data.message);
-        });
       }
     }
   }
